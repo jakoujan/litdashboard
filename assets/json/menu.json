@@ -1,0 +1,12 @@
+{
+    "modules": [
+        {
+            "title": "Menu 1",
+            "link": "/pagina-1"
+        },
+        {
+            "title": "Menu 2",
+            "link": "/pagina-2"
+        }
+    ]
+}
