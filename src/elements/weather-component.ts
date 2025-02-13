@@ -5,22 +5,10 @@ import { customElement, property } from 'lit/decorators.js';
 export class WeatherComponent extends LitElement {
   static styles = css`
     :host {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: block;
+      width: 100%;
       height: 100vh;
-      font-family: Arial, sans-serif;
       transition: background 0.5s ease;
-    }
-    .weather-card {
-      background: rgba(255, 255, 255, 0.8);
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-    .weather-info {
-      margin-top: 1rem;
     }
   `;
 
@@ -65,15 +53,15 @@ export class WeatherComponent extends LitElement {
 
       if (temp < 10) {
         color1 = '#87CEEB';
-        color2 = '#FFFFFF';
+        color2 = '#FFFFFF'; 
       } else if (temp >= 10 && temp < 20) {
         color1 = '#ADD8E6';
-        color2 = '#F0E68C';
+        color2 = '#F0E68C'; 
       } else if (temp >= 20 && temp < 30) {
-        color1 = '#FFA07A';
-        color2 = '#FFD700'; 
+        color1 = '#FFA07A'; 
+        color2 = '#FFD700';
       } else {
-        color1 = '#FF4500';
+        color1 = '#FF4500'; 
         color2 = '#FFD700';
       }
 
@@ -97,33 +85,36 @@ export class WeatherComponent extends LitElement {
 
   render() {
     return html`
-      <div class="weather-card">
-        <form @submit=${this.handleSubmit} class="mb-3">
-          <div class="input-group">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Ingresa una ciudad"
-              .value=${this.city}
-              @input=${this.handleInput}
-            />
-            <button type="submit" class="btn btn-primary">Obtener Clima</button>
-          </div>
-        </form>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+      <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="weather-card bg-light p-4 rounded shadow text-center">
+          <form @submit=${this.handleSubmit} class="mb-3">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingresa una ciudad"
+                .value=${this.city}
+                @input=${this.handleInput}
+              />
+              <button type="submit" class="btn btn-primary">Obtener Clima</button>
+            </div>
+          </form>
 
-        ${this.error
-          ? html`<div class="alert alert-danger">${this.error}</div>`
-          : this.weather
-          ? html`
-              <div class="weather-info">
-                <h2>Clima en ${this.weather.name}</h2>
-                <p>Temperatura: ${this.weather.main.temp}°C</p>
-                <p>Condición: ${this.weather.weather[0].description}</p>
-                <p>Humedad: ${this.weather.main.humidity}%</p>
-                <p>Viento: ${this.weather.wind.speed} m/s</p>
-              </div>
-            `
-          : html`<p>Ingresa una ciudad para ver el clima.</p>`}
+          ${this.error
+            ? html`<div class="alert alert-danger">${this.error}</div>`
+            : this.weather
+            ? html`
+                <div class="weather-info">
+                  <h2>Clima en ${this.weather.name}</h2>
+                  <p class="mb-1">Temperatura: ${this.weather.main.temp}°C</p>
+                  <p class="mb-1">Condición: ${this.weather.weather[0].description}</p>
+                  <p class="mb-1">Humedad: ${this.weather.main.humidity}%</p>
+                  <p class="mb-0">Viento: ${this.weather.wind.speed} m/s</p>
+                </div>
+              `
+            : html`<p class="mb-0">Ingresa una ciudad para ver el clima.</p>`}
+        </div>
       </div>
     `;
   }
