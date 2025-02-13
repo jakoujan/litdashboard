@@ -1,12 +1,20 @@
 {
     "modules": [
         {
-            "title": "Menu 1",
-            "link": "/pagina-1"
+            "title": "Diccionario",
+            "link": "#dictionary"
         },
         {
-            "title": "Menu 2",
-            "link": "/pagina-2"
+            "title": "Clima",
+            "link": "#clima"
+        },
+        {
+            "title": "Widget-3",
+            "link": "#clima"
+        },
+        {
+            "title": "Widget-4",
+            "link": "#clima"
         }
     ]
 }
