@@ -12,6 +12,19 @@ export class NasaElement extends LitElement {
       font-family: Arial, sans-serif;
       padding: 1rem;
     }
+    .container{
+      width:100%;
+      display: flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+    }
+    .nasa-container{
+      width:50%;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 17px;
+    }
     img, iframe {
       max-width: 90%;
       border-radius: 10px;
@@ -90,9 +103,12 @@ export class NasaElement extends LitElement {
 
   render() {
     return html`
-      <h2>${this.title}</h2>
-      <input type="date" @change=${this.handleDateChange} value="${this.selectedDate}" max="${this.getTodayDate()}"/>
-      <button @click=${this.fetchNasaImage}>Ver imagen</button>
+    <div class="container">
+      <div class="nasa-container">
+        <h2>Multimedia NASA del día</h2>
+        <input type="date" @change=${this.handleDateChange} value="${this.selectedDate}" max="${this.getTodayDate()}"/>
+        <button @click=${this.fetchNasaImage}>Ver imagen</button>
+        <h3>${this.title}</h2>
 
       ${this.mediaType === 'image'
         ? html`<img src="${this.imageUrl}" alt="NASA Image of the Day" />`
@@ -101,6 +117,8 @@ export class NasaElement extends LitElement {
         : html`<p>No hay contenido disponible.</p>`}
 
       <p>${this.description}</p>
+      </div>
+      </div>
     `;
   }
 }
