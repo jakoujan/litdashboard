@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
-class WeatherComponent extends LitElement {
+@customElement('weather-component')
+export class WeatherComponent extends LitElement {
   static styles = css`
     :host {
       display: flex;
@@ -22,18 +24,14 @@ class WeatherComponent extends LitElement {
     }
   `;
 
-  static properties = {
-    city: { type: String },
-    weather: { type: Object },
-    error: { type: String },
-  };
+  @property({ type: String })
+  city: string = '';
 
-  constructor() {
-    super();
-    this.city = 'México';
-    this.weather = null;
-    this.error = '';
-  }
+  @property({ type: Object })
+  weather: any = null;
+
+  @property({ type: String })
+  error: string = '';
 
   async fetchWeather() {
     const apiKey = '8a5bbe56f7882ee6d29c4234653e3124';
@@ -56,38 +54,39 @@ class WeatherComponent extends LitElement {
     } catch (error) {
       console.error('Error fetching weather data:', error);
       this.weather = null;
-      this.error = error.message;
+      this.error = (error as Error).message;
     }
   }
 
   updateBackground() {
     if (this.weather) {
       const temp = this.weather.main.temp;
-      let color1, color2;
+      let color1: string, color2: string;
 
       if (temp < 10) {
         color1 = '#87CEEB';
-        color2 = '#FFFFFF'; 
+        color2 = '#FFFFFF';
       } else if (temp >= 10 && temp < 20) {
-        color1 = '#ADD8E6'; 
-        color2 = '#F0E68C'; 
+        color1 = '#ADD8E6';
+        color2 = '#F0E68C';
       } else if (temp >= 20 && temp < 30) {
-        color1 = '#FFA07A'; 
-        color2 = '#FFD700';
-      } else {
-        color1 = '#FF4500'; 
+        color1 = '#FFA07A';
         color2 = '#FFD700'; 
+      } else {
+        color1 = '#FF4500';
+        color2 = '#FFD700';
       }
 
       this.style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
     }
   }
 
-  handleInput(event) {
-    this.city = event.target.value;
+  handleInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.city = input.value;
   }
 
-  async handleSubmit(event) {
+  async handleSubmit(event: Event) {
     event.preventDefault();
     if (this.city.trim() === '') {
       this.error = 'Por favor, ingresa una ciudad';
@@ -129,5 +128,3 @@ class WeatherComponent extends LitElement {
     `;
   }
 }
-
-customElements.define('weather-component', WeatherComponent);
