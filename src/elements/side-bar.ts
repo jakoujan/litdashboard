@@ -21,7 +21,6 @@ export class SideBarElement extends LitElement {
             .then(response => response.json())
             .then(data => this.menu = data.modules)
             .catch(error => console.error(error))
-            .finally(() => console.log('fetch completed', this.menu));
     }
 
     connectedCallback() {
@@ -47,7 +46,7 @@ export class SideBarElement extends LitElement {
 
     protected render(): unknown {
         return html`
-        <button class="btn btn-outline-primary btn-menu position-absolute text-decoration-none" type="button" @click="${this.openOffcanvas}">
+        <button class="btn btn-outline-primary btn-menu text-decoration-none z-9" type="button" @click="${this.openOffcanvas}">
             <svg class="bi" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
             </svg>

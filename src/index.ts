@@ -1,5 +1,6 @@
 import './elements/hello-world'
-
+import './elements/side-bar'
+import './elements/dictionary'
 import './elements/header-element'
 import './elements/nasa-element'
 import './elements/news'
