@@ -104,8 +104,8 @@ export class WidgetExchange extends LitElement {
         rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous">
 
-        <div class="shadow w-25 mx-auto flex flex-row justify-content-center bg-body-tertiary rounded ">
-            <div class="w-100  flex flex-column gap-3 p-3 mt-5" >
+        <div class=" card shadow w-75 mx-auto mt-5  bg-body-tertiary rounded ">
+            <div class="w-100  flex flex-column gap-3 p-3 mt-5 mb-3" >
                 <h5 class="card-title text-center">Conversor de divisas</h5>
                 <div class="">
                 <label for="fromCurrency" class="form-label">Moneda de origen</label>
@@ -150,13 +150,13 @@ export class WidgetExchange extends LitElement {
                 >
                 Convertir
                 </button>
-                <div class="input-group mt-3 mb-3">
+                <div class="input-group mt-3">
                   <span class="input-group-text" >Resultado</span>
-                  <input type="text" class="form-control" value="${this.result}">
+                  <input type="text" class="form-control" disabled value="${this.result}">
                 </div>
             </div>
 
-            <div id="canvas-container" class=" px-3 d-none">
+            <div id="canvas-container" class=" w-100 p-3 d-none">
                 <canvas id="canvas"></canvas>
             </div>
         </div>
