@@ -3,6 +3,9 @@ import { customElement, state } from 'lit/decorators.js';
 
 @customElement('nasa-element')
 export class NasaElement extends LitElement {
+  createRenderRoot() {
+    return this;
+  }
   static styles = css`
     :host {
       display: flex;
@@ -40,19 +43,19 @@ export class NasaElement extends LitElement {
   `;
 
   @state()
-    imageUrl: string = '';
+  imageUrl: string = '';
 
   @state()
-    mediaType: string = '';
+  mediaType: string = '';
 
   @state()
-    title: string = '';
+  title: string = '';
 
   @state()
-    description: string = '';
+  description: string = '';
 
   @state()
-    selectedDate: string = '';
+  selectedDate: string = '';
 
   async firstUpdated() {
     this.selectedDate = this.getTodayDate();
@@ -60,11 +63,11 @@ export class NasaElement extends LitElement {
   }
 
   getTodayDate(): string {
-    return new Date().toISOString().split('T')[0]; 
+    return new Date().toISOString().split('T')[0];
   }
 
   async fetchNasaImage() {
-    const API_KEY = 'Ns5GxBYUExZYhqTrB9xbVy94dX2ODIwKzV35xaXM'; 
+    const API_KEY = 'Ns5GxBYUExZYhqTrB9xbVy94dX2ODIwKzV35xaXM';
     const url = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${this.selectedDate}`;
 
     try {
@@ -90,17 +93,22 @@ export class NasaElement extends LitElement {
 
   render() {
     return html`
-      <h2>${this.title}</h2>
-      <input type="date" @change=${this.handleDateChange} value="${this.selectedDate}" max="${this.getTodayDate()}"/>
-      <button @click=${this.fetchNasaImage}>Ver imagen</button>
-
-      ${this.mediaType === 'image'
-        ? html`<img src="${this.imageUrl}" alt="NASA Image of the Day" />`
+      <div id="nasa" class="card" style="width: 25rem;">
+        <h3 class="card-title">Multimedia NASA del día</h2>
+        <input class= "mx-2" type="date" @change=${this.handleDateChange} value="${this.selectedDate}" max="${this.getTodayDate()}"/>
+        <button class="btn btn-primary my-2 mx-2" @click=${this.fetchNasaImage}>Ver imagen</button>
+ 
+        ${this.mediaType === 'image'
+        ? html`<img class="card-img-top" src="${this.imageUrl}" alt="NASA Image of the Day">`
         : this.mediaType === 'video'
-        ? html`<iframe width="560" height="315" src="${this.imageUrl}" frameborder="0" allowfullscreen></iframe>`
-        : html`<p>No hay contenido disponible.</p>`}
-
-      <p>${this.description}</p>
+          ? html`<iframe class="card-img-top" src="${this.imageUrl}" frameborder="0" allowfullscreen></iframe>`
+          : html`<p>No hay contenido disponible.</p>`}
+        <div class="card-body">
+        <h5>${this.title}</h5>
+        <p class="card-text">${this.description}</p>
+  </div>
+</div>
+      
     `;
   }
 }
