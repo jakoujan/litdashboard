@@ -31,14 +31,15 @@ export class NewsComponent extends LitElement {
     }
 
     protected render() {
+      const articlesPerWidget = this.articles.slice(0, 5);
         return html`
-      <div class="container mt-5">
-        <h1 class="text-center mb-4">Últimas Noticias</h1>
+      <div class="card mt-3">
+        <h2 class="text-center mb-3">Últimas Noticias</h2>
         <div class="row">
-          ${this.articles.map(
+          ${articlesPerWidget.map(
             (article) => html`
-              <div class="col-md-4 mb-4">
-                <div class="card" style="width: 18rem;">
+              <div class="col-md-4 mb-3">
+                <div class="card-main" style="width: 100%;">
                   <img src="${article.urlToImage}" class="card-img-top" alt="${article.title}" />
                   <div class="card-body">
                     <h5 class="card-title">${article.title}</h5>
@@ -55,60 +56,65 @@ export class NewsComponent extends LitElement {
     }
 
     static styles = css`
-    .container{
-    margin-left: 20px;
+  :host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  .card {
+    margin: 10px;
+    width: 300px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin-bottom: 50px;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .card-img-top {
+    height: 120px;
+    object-fit: cover;
+    padding-left: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .card-body {
+    padding: 10px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .card-text {
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  @media (max-width: 412px) {
+    .card {
+      width: 100%;
     }
+  }
+`;
 
-    .card-img-top {
-      height: 200px;
-      object-fit: cover;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-    }
-
-    .custom-card {
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease-in-out;
-    }
-
-    .custom-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    .card-body {
-      padding: 15px;
-    }
-
-    .card-title {
-      font-size: 1.1rem;
-      font-weight: bold;
-    }
-
-    .card-text {
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 15px;
-    }
-
-    .row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-
-    .col-md-4 {
-        flex: 0 0 32%; 
-        max-width: 32%;
-      }
-
-    @media (max-width: 420px) {
-      .col-md-4 {
-        flex: 0 0 100%; 
-        max-width: 100%;
-      }
-    }
-  `;
 }

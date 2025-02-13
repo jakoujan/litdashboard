@@ -1,5 +1,11 @@
 import './elements/hello-world';
+import './elements/exchange/widget-exchange';
+import './elements/side-bar';
+import './elements/dictionary';
+import './elements/header-element';
+import './elements/nasa-element';
 import './elements/news';
 import './elements/music-search';
 import './elements/side-bar';
+import './elements/weather-component';
 //# sourceMappingURL=index.d.ts.map
