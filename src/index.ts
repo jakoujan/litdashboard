@@ -1,4 +1,5 @@
 import './elements/hello-world'
+import './elements/exchange/widget-exchange'
 import './elements/side-bar'
 import './elements/dictionary'
 import './elements/header-element'
