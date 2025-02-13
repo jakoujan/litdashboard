@@ -86,7 +86,7 @@ export class WeatherComponent extends LitElement {
   render() {
     return html`
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-      <div class="d-flex justify-content-center align-items-center vh-100">
+      <div id="clima" class="d-flex justify-content-center align-items-center vh-100">
         <div class="weather-card bg-light p-4 rounded shadow text-center">
           <form @submit=${this.handleSubmit} class="mb-3">
             <div class="input-group">
